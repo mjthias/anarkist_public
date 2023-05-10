@@ -1,0 +1,11 @@
+---
+export interface Props {
+	text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="bg-blue-400 rounded-lg inline-block p-10">
+	<p>{text}</p>
+</div>
