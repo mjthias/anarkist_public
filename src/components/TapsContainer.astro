@@ -1,7 +1,7 @@
 ---
 import Tap from './Tap.astro'
 import OffWallTap from './OffWallTap.astro'
-const { taps } = Astro.props
+const { taps, lang, strs } = Astro.props
 
 const offTheWalls = taps.filter(tap => tap.tap_number == null);
 const numberedTaps = taps.filter(tap => tap.tap_number !== null);
@@ -10,7 +10,7 @@ const numberedTaps = taps.filter(tap => tap.tap_number !== null);
 <div>
     <div>
         {numberedTaps.map((tap) => {
-            return <Tap tap={tap} />
+            return <Tap tap={tap} lang={lang} strs={strs} />
         })}
     </div>
 

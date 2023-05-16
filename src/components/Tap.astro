@@ -1,6 +1,6 @@
 ---
-import { toBeerPath } from "../utils/g"
-const { tap } = Astro.props
+const { tap, lang, strs } = Astro.props
+
 const {
     tap_number,
     beer_name, 
@@ -13,6 +13,9 @@ const {
     beer_description_en,
     beer_description_dk,
     } = tap
+    console.log(strs)
+
+    const beerDescription = lang == "da" ? beer_description_dk : beer_description_en
 ---
 
 <article>
@@ -20,10 +23,10 @@ const {
     <p>{beer_style_name} | {brewery_name}</p>
     <p>ALC.: {beer_alc}% <span>|</span> IBU: {beer_ibu} <span>|</span> EBC: {beer_ebc}</p>
     <p>{beer_price} DKK</p>
-    {beer_description_en &&
+    {beerDescription &&
         <details>
-            <summary>Read more</summary>
-            <p>{beer_description_en}</p>
+            <summary>{strs.readMore}</summary>
+            <p>{beerDescription}</p>
         </details>
     }
 </article>
