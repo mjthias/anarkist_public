@@ -1,4 +1,4 @@
-export const API_BASE_URL = process.env.NODE_ENV == 'production' ? "TODO" : "http://127.0.0.1:5555";
+export const API_BASE_URL = import.meta.env.PUBLIC_ENV == 'dev' ? "http://127.0.0.1:5555" : "http://anarkist.eu.pythonanywhere.com" ;
 
 export function slugify(value) {
     return value
