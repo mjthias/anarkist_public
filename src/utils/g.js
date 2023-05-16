@@ -1,5 +1,21 @@
-export const API_BASE_URL = import.meta.env.PUBLIC_ENV == 'dev' ? "http://127.0.0.1:5555" : "http://anarkist.eu.pythonanywhere.com" ;
+// VARS
+export const API_BASE_URL = import.meta.env.PUBLIC_ENV == 'dev' ? "http://127.0.0.1:5555" : "http://anarkist.eu.pythonanywhere.com";
+export const SUPPORTED_LANGS = ["da", "en"]
+export const MAIN_LANG = "da"
+export const LANG_STRINGS = {
+    da: {
+        beers: "Øl",
+        readMore: "Læs mere",
+        pizzas: "Pizzaer",
+    },
+    en: {
+        beers: "Beers",
+        readMore: "Read more",
+        pizzas: "Pizzas",
+    }
+}
 
+// FUNCTIONS
 export function slugify(value) {
     return value
         .toLowerCase()
@@ -13,10 +29,6 @@ export function slugify(value) {
 
 export function toBarPath(obj) {
     return `${slugify(obj.bar_name)}/${slugify(obj.bar_street)}-${slugify(obj.bar_city)}`
-}
-
-export function toBeerPath(obj) {
-    return `${slugify(obj.brewery_name)}/${slugify(obj.beer_name)}`
 }
 
 export function filterTapsByBarId(taps, barId) {

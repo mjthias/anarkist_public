@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import TapsContainer from '../components/TapsContainer.astro'
-import { API_BASE_URL, filterTapsByBarId, toBarPath } from "../utils/g"
+import Layout from "../layouts/Layout.astro";
+import TapsContainer from "../components/TapsContainer.astro";
+import { API_BASE_URL, SUPPORTED_LANGS, MAIN_LANG, LANG_STRINGS, filterTapsByBarId, toBarPath } from "../utils/g";
 
 export async function getStaticPaths() {
     const barsRes = await fetch(`${API_BASE_URL}/api/bars`);
@@ -10,28 +10,42 @@ export async function getStaticPaths() {
     const tapsRes = await fetch(`${API_BASE_URL}/api/taps?limit=-1`);
     const taps = await tapsRes.json();
 
-    return bars.map((bar) => {
-        return {
-            params: { path: toBarPath(bar) },
-            props: { bar, taps: filterTapsByBarId(taps, bar.bar_id) },
-        };
+    const paths = [];
+
+    // Genarate bar-path for each supported language
+    SUPPORTED_LANGS.forEach((lang) => {
+        bars.forEach((bar) => {
+            const path = lang != MAIN_LANG ? `${lang}/${toBarPath(bar)}` : toBarPath(bar);
+
+            paths.push({
+                params: { path },
+                props: { bar, lang, taps: filterTapsByBarId(taps, bar.bar_id) },
+            });
+        });
     });
+
+    return paths;
 }
 
-const { bar, taps } = Astro.props
+const { bar, taps, lang } = Astro.props;
+const strs = LANG_STRINGS[lang] // Object with lang strings
 ---
 
-<Layout>
+<Layout title={`${bar.bar_name} | ${bar.bar_city}`} lang={lang}>
+
     <section aria-label={bar.bar_name}>
         <h1>{bar.bar_name}</h1>
         <address>
-            {bar.bar_street} <br>
-            {bar.bar_zip_code} {bar.bar_city}
+            {bar.bar_street}
+            <br />
+            {bar.bar_zip_code}
+            {bar.bar_city}
         </address>
     </section>
 
-    <section aria-label="beers">
-        <h2>Beers</h2>
-        <TapsContainer taps={taps} />
+    <section aria-label={strs.beers}>
+        <h2>{strs.beers}</h2>
+        <TapsContainer taps={taps} lang={lang} strs={strs}/>
     </section>
+
 </Layout>
