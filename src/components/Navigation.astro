@@ -1,0 +1,19 @@
+---
+import { API_BASE_URL, toBarPath } from "../utils/g"
+const res = await fetch(`${API_BASE_URL}/api/bars`);
+const bars = await res.json();
+---
+
+<header>
+    <nav>
+        <ul>
+            {bars.map((bar) => {
+                return (
+                    <li>
+                        <a href={"/" + toBarPath(bar)}>{bar.bar_name}</a>
+                    </li>
+                    )
+            })}
+        </ul>
+    </nav>
+</header>

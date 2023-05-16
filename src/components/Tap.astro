@@ -1,0 +1,22 @@
+---
+import { toBeerPath } from "../utils/g"
+const { tap } = Astro.props
+const {
+    tap_number,
+    beer_name, 
+    beer_style_name, 
+    brewery_name,
+    beer_alc,
+    beer_ibu,
+    beer_ebc,
+    beer_price,
+    } = tap
+---
+
+<article>
+    <h3>{tap_number ? `${tap_number}. ${beer_name}` : beer_name}</h3>
+    <p>{beer_style_name} | {brewery_name}</p>
+    <p>ALC.: {beer_alc}% <span>|</span> IBU: {beer_ibu} <span>|</span> EBC: {beer_ebc}</p>
+    <p>{beer_price} DKK</p>
+    <a href={`/${toBeerPath(tap)}`}>Read more</a>
+</article>
