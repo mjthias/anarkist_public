@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TapsContainer from '../components/TapsContainer.astro'
+import { API_BASE_URL, filterTapsByBarId, toBarPath } from "../utils/g"
+
+export async function getStaticPaths() {
+    const barsRes = await fetch(`${API_BASE_URL}/api/bars`);
+    const bars = await barsRes.json();
+
+    const tapsRes = await fetch(`${API_BASE_URL}/api/taps?limit=-1`);
+    const taps = await tapsRes.json();
+
+    return bars.map((bar) => {
+        return {
+            params: { path: toBarPath(bar) },
+            props: { bar, taps: filterTapsByBarId(taps, bar.bar_id) },
+        };
+    });
+}
+
+const { bar, taps } = Astro.props
+---
+
+<Layout>
+    <section aria-label={bar.bar_name}>
+        <h1>{bar.bar_name}</h1>
+        <address>
+            {bar.bar_street} <br>
+            {bar.bar_zip_code} {bar.bar_city}
+        </address>
+    </section>
+
+    <section aria-label="beers">
+        <h2>Beers</h2>
+        <TapsContainer taps={taps} />
+    </section>
+</Layout>
