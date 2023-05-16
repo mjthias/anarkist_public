@@ -10,6 +10,8 @@ const {
     beer_ibu,
     beer_ebc,
     beer_price,
+    beer_description_en,
+    beer_description_dk,
     } = tap
 ---
 
@@ -18,5 +20,10 @@ const {
     <p>{beer_style_name} | {brewery_name}</p>
     <p>ALC.: {beer_alc}% <span>|</span> IBU: {beer_ibu} <span>|</span> EBC: {beer_ebc}</p>
     <p>{beer_price} DKK</p>
-    <a href={`/${toBeerPath(tap)}`}>Read more</a>
+    {beer_description_en &&
+        <details>
+            <summary>Read more</summary>
+            <p>{beer_description_en}</p>
+        </details>
+    }
 </article>
