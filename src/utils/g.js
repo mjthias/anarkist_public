@@ -5,11 +5,13 @@ export const MAIN_LANG = "da"
 export const LANG_STRINGS = {
     da: {
         beers: "Øl",
+        beersLink: "Gå til øl",
         readMore: "Læs mere",
         pizzas: "Pizzaer",
     },
     en: {
         beers: "Beers",
+        beersLink: "Go to beers",
         readMore: "Read more",
         pizzas: "Pizzas",
     }

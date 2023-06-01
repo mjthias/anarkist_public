@@ -1,4 +1,6 @@
 ---
+import {Picture} from '@astrojs/image/components';
+import { API_BASE_URL, LANG_STRINGS } from "../utils/g";
 const { tap, lang, strs } = Astro.props
 
 const {
@@ -21,11 +23,25 @@ const {
     const beerDescription = lang == "da" ? beer_description_dk : beer_description_en
 ---
 
-<article>
-    <h3 class="text-3xl">{tap_number ? `${tap_number}. ${beer_name}` : beer_name}</h3>
-    <p>{beer_style_name} | {brewery_name}</p>
-    <p>ALC.: {beer_alc}% <span>|</span> IBU: {beer_ibu} <span>|</span> EBC: {beer_ebc}</p>
-    <p>{beer_price} DKK</p>
+<article class="grid grid-cols-3 gap-4">
+    <div class="hidden sm:block col-span-full">
+        <h3 class="text-xl">{tap_number ? `${tap_number}. ${beer_name}` : beer_name}</h3>
+    </div>
+    <div class="col-span-1 sm:col-span-full">
+        <Picture src={`${API_BASE_URL}/static/images/${beer_image}`} widths={[100, 300, 500]} sizes="(max-width: 500px) 100vw, 500px" aspectRatio="1:1" alt=""/>
+    </div>
+    <div class="col-span-2 sm:col-span-full flex flex-col justify-between">
+        <div class="flex flex-col">
+            <h3 class="text-xl sm:hidden">{tap_number ? `${tap_number}. ${beer_name}` : beer_name}</h3>
+            <p class="sm:order-2">{beer_style_name} <span class="mx-2 sm:hidden">|</span> <span class="sm:block">{brewery_name}</span></p>
+            <p class="text-xs md:text-sm sm:order-1 sm:flex sm:justify-between">ALC.: {beer_alc}% <span class="mx-2">|</span> IBU: {beer_ibu} <span class="mx-2">|</span> EBC: {beer_ebc}</p>
+        </div>
+        <div>
+            <p class="text-right">{beer_price} DKK</p>
+
+        </div>
+    </div>
+    
     {beerDescription &&
         <details>
             <summary>{strs.readMore}</summary>
