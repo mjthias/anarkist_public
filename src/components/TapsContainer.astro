@@ -14,7 +14,7 @@ const numberedTaps = taps.filter(tap => tap.tap_number !== null);
         })}
     </div>
 
-    <article>
+    <div>
         <h2>
             <span>Off</span>
             <span>the</span>
@@ -23,5 +23,5 @@ const numberedTaps = taps.filter(tap => tap.tap_number !== null);
         {offTheWalls.map((tap) => {
             return <OffWallTap tap={tap} />
         })}
-    </article>
+    </div>
 </div>

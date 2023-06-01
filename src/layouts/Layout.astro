@@ -12,7 +12,7 @@ const { title, lang } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-background text-primary" style="--tw-bg-opacity: 1">
 		<Navigation />
 		<main>
 			<slot />

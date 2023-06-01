@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import TapsContainer from "../components/TapsContainer.astro";
 import { API_BASE_URL, SUPPORTED_LANGS, MAIN_LANG, LANG_STRINGS, filterTapsByBarId, toBarPath } from "../utils/g";
+import frontpage_image from '../../public/frontpage_image.png';
 
 export async function getStaticPaths() {
     const barsRes = await fetch(`${API_BASE_URL}/api/v1/bars`);
@@ -32,15 +33,13 @@ const strs = LANG_STRINGS[lang] // Object with lang strings
 ---
 <Layout title={`${bar.bar_name} | ${bar.bar_city}`} lang={lang}>
 
-    <section aria-label={bar.bar_name}>
-        <h1>{bar.bar_name}</h1>
+    <header aria-label={bar.bar_name} class="min-h-screen flex justify-center items-center flex-col">
+        <h1 class="text-5xl">{bar.bar_name}</h1>
         <address>
-            {bar.bar_street}
-            <br />
-            {bar.bar_zip_code}
-            {bar.bar_city}
+            {bar.bar_street} - {bar.bar_zip_code}{bar.bar_city}
         </address>
-    </section>
+        <img src={frontpage_image} />
+    </header>
 
     <section aria-label={strs.beers}>
         <h2>{strs.beers}</h2>
