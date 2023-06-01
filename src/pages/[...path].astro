@@ -4,10 +4,10 @@ import TapsContainer from "../components/TapsContainer.astro";
 import { API_BASE_URL, SUPPORTED_LANGS, MAIN_LANG, LANG_STRINGS, filterTapsByBarId, toBarPath } from "../utils/g";
 
 export async function getStaticPaths() {
-    const barsRes = await fetch(`${API_BASE_URL}/api/bars`);
+    const barsRes = await fetch(`${API_BASE_URL}/api/v1/bars`);
     const bars = await barsRes.json();
 
-    const tapsRes = await fetch(`${API_BASE_URL}/api/taps?limit=-1`);
+    const tapsRes = await fetch(`${API_BASE_URL}/api/v1/taps?limit=-1`);
     const taps = await tapsRes.json();
 
     const paths = [];
@@ -30,7 +30,6 @@ export async function getStaticPaths() {
 const { bar, taps, lang } = Astro.props;
 const strs = LANG_STRINGS[lang] // Object with lang strings
 ---
-
 <Layout title={`${bar.bar_name} | ${bar.bar_city}`} lang={lang}>
 
     <section aria-label={bar.bar_name}>
