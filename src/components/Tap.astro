@@ -17,7 +17,6 @@ const {
     beer_style_name, 
     brewery_menu_name,
     } = tap
-    console.log(tap)
 
     const beerImage = beer_image == "" ? "placeholder.jpg" : beer_image;
     const beerDescription = lang == "da" ? beer_description_dk : beer_description_en;
@@ -41,7 +40,7 @@ const {
     <div class="col-span-1 sm:col-span-full">
         <Picture 
             class="rounded sm:mb-2" 
-            src={`${API_BASE_URL}/static/images/${beerImage}`} 
+            src={beerImage ? `${API_BASE_URL}/static/images/${beerImage}` : "/placeholder.jpg"} 
             widths={[100, 200, 300, 600]} 
             sizes="(max-width: 640) 100px, 300px" 
             width={600}
