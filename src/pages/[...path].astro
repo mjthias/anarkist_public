@@ -34,10 +34,10 @@ const strs = LANG_STRINGS[lang] // Object with lang strings
 ---
 <Layout title={`${bar.bar_name} | ${bar.bar_city}`} lang={lang}>
 
-    <header aria-label={bar.bar_name} class="min-h-screen flex justify-center items-center flex-col">
+    <header aria-label={bar.bar_name} class="min-h-[calc(100vh-54px)] flex justify-center items-center flex-col">
         <h1 class="text-5xl font-medium leading-none">{bar.bar_name}</h1>
         <address class="font-medium not-italic leading-none mb-8">
-            {bar.bar_street} - {bar.bar_zip_code}{bar.bar_city}
+            {bar.bar_street} - {bar.bar_zip_code} {bar.bar_city}
         </address>
         <Picture class="mb-6" src={frontpage_image} widths={[200, 400, 600]} sizes="(max-width: 600px) 100vw, 600px" alt="" />
         <a class="font-medium underline" href="#beers">{strs.beersLink}</a>

@@ -1,17 +1,34 @@
 ---
 import { API_BASE_URL, toBarPath } from "../utils/g"
+import CloseIcon from './icons/CloseIcon.astro';
+import BurgerIcon from "./icons/BurgerIcon.astro";
+
 const res = await fetch(`${API_BASE_URL}/api/v1/bars`);
 const bars = await res.json();
 ---
 
-<nav>
-    <ul>
+<nav class="h-[54px] fixed w-full bg-background border-b-[1px] border-line">
+    <div class="w-full h-full flex items-center justify-end">
+        <div onclick="toggleBurgerMenu()" class="w-6 h-6 flex items-center justify-center mr-4 relative cursor-pointer">
+            <!-- rotate-180 -->
+            <span id="burger" class="w-full absolute transition-transform rotate-0">
+                <BurgerIcon Class="fill-primary transition-opacity"/>
+            </span>
+            <span id="burger-close" class="w-full absolute transition-transform rotate-0">
+                <CloseIcon Class="fill-primary transition-opacity opacity-0" />
+            </span>
+        </div>
+    </div>
+    <ul class="burger-menu fixed top-[54px] w-screen h-[calc(100vh-54px)] bg-background translate-x-full transition-transform duration-300 p-4 md:p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         {bars.map((bar) => {
             return (
-                <li>
-                    <a href={"/" + toBarPath(bar)}>{bar.bar_name}</a>
+                <li class="">
+                    <a class="md:text-lg leading-none" href={"/" + toBarPath(bar)}>{bar.bar_name}</a>
+                    <span class="text-secondary text-sm md:text-base leading-none block">{`${bar.bar_street}`}</span>
+                    <span class="text-secondary text-sm md:text-base leading-none block">{`${bar.bar_zip_code} ${bar.bar_city}`}</span>
                 </li>
                 )
         })}
     </ul>
+    <!-- !translate-x-0 -->
 </nav>
