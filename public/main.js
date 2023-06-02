@@ -14,3 +14,7 @@ function toggleBurgerMenu() {
     const menu = document.querySelector(".burger-menu");
     menu.classList.toggle("!translate-x-0");
 }
+
+function toggleLocales() {
+    document.querySelector("#locale-container").classList.toggle("hidden")
+}
