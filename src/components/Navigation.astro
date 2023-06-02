@@ -1,5 +1,5 @@
 ---
-import { API_BASE_URL, toBarPath } from "../utils/g"
+import { API_BASE_URL, SUPPORTED_LANGS, MAIN_LANG, toBarPath } from "../utils/g"
 import CloseIcon from './icons/CloseIcon.astro';
 import BurgerIcon from "./icons/BurgerIcon.astro";
 import {Picture} from '@astrojs/image/components';
@@ -7,30 +7,73 @@ import anarkist_logo from '/public/anarkist_logo_light.png';
 
 const res = await fetch(`${API_BASE_URL}/api/v1/bars`);
 const bars = await res.json();
+const { lang } = Astro.props
 ---
 
 <nav class="h-[54px] fixed w-full bg-background border-b-[1px] border-line">
+
     <div class="w-full h-full flex items-center justify-between">
-        <div class="">
-            <Picture class="ml-4" src={anarkist_logo} widths={[50, 100, 150, 200]} sizes="(max-width: 100px) 100vw, 100px" alt="" aspectRatio="40:13" /> 
+
+        <a href={`/`}>
+            <Picture 
+                class="ml-4" 
+                src={anarkist_logo}
+                widths={[100, 200]} 
+                sizes="100px"
+                alt="Anarkist logo" 
+                aspectRatio="40:13" 
+                /> 
+        </a>
+
+        <div class="flex gap-8">
+            {Astro.url.pathname != "/" &&
+                <div class="relative">
+
+                    <button 
+                        onclick="toggleLocales()"
+                        class="uppercase">
+                        { !lang ? MAIN_LANG : lang }
+                    </button>
+
+                    <ul id="locale-container" class="absolute top-[3rem] hidden">
+                        {SUPPORTED_LANGS.map((language) => {
+                            if (language == lang || (language == MAIN_LANG && lang == "")) return;
+                            const currentPath = Astro.url.pathname;
+                            let href = null;
+                            if (language != MAIN_LANG) href = `/${language}${currentPath}`
+                            else href = currentPath.substring(3)
+                            return <li><a class="uppercase" href={href}>{language}</a></li>
+                        })}
+                    </ul>
+                </div>
+            }
+
+            <div onclick="toggleBurgerMenu()" class="w-6 h-6 flex items-center justify-center mr-4 relative cursor-pointer">
+                <!-- rotate-180 -->
+                <span id="burger" class="w-full absolute transition-transform rotate-0">
+                    <BurgerIcon Class="fill-primary transition-opacity"/>
+                </span>
+                <span id="burger-close" class="w-full absolute transition-transform rotate-0">
+                    <CloseIcon Class="fill-primary transition-opacity opacity-0" />
+                </span>
+            </div>
+
         </div>
-        <div onclick="toggleBurgerMenu()" class="w-6 h-6 flex items-center justify-center mr-4 relative cursor-pointer">
-            <!-- rotate-180 -->
-            <span id="burger" class="w-full absolute transition-transform rotate-0">
-                <BurgerIcon Class="fill-primary transition-opacity"/>
-            </span>
-            <span id="burger-close" class="w-full absolute transition-transform rotate-0">
-                <CloseIcon Class="fill-primary transition-opacity opacity-0" />
-            </span>
-        </div>
+
     </div>
+
     <ul class="burger-menu fixed top-[54px] w-screen h-[calc(100vh-54px)] bg-background translate-x-full transition-transform duration-300 p-4 md:p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         {bars.map((bar) => {
             return (
                 <li class="">
-                    <a class="md:text-lg leading-none" href={"/" + toBarPath(bar)}>{bar.bar_name}</a>
-                    <span class="text-secondary text-sm md:text-base leading-none block">{`${bar.bar_street}`}</span>
-                    <span class="text-secondary text-sm md:text-base leading-none block">{`${bar.bar_zip_code} ${bar.bar_city}`}</span>
+                    <a class="md:text-lg leading-none" href={"/" + toBarPath(bar)}>{bar.bar_name}
+                    <span class="text-secondary text-sm md:text-base leading-none block">
+                        {`${bar.bar_street}`}
+                    </span>
+                    <span class="text-secondary text-sm md:text-base leading-none block">
+                        {`${bar.bar_zip_code} ${bar.bar_city}`}
+                    </span>
+                    </a>
                 </li>
                 )
         })}
