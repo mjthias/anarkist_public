@@ -25,7 +25,11 @@ module.exports = {
 			sans: ['Barlow Semi Condensed', 'sans-serif'],
 			pixel: ['pixel', 'sans-serif']
 		},
-		extend: {},
+		extend: {
+			spacing: {
+				'104': '26rem'
+			}
+		},
 	},
 	plugins: [],
 }
