@@ -64,17 +64,21 @@ const { lang } = Astro.props
 
     </div>
 
-    <ul class="burger-menu fixed top-[54px] w-screen h-[calc(100vh-54px)] bg-background translate-x-full transition-transform duration-300 p-4 md:p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+    <ul class="burger-menu fixed top-[54px] w-screen h-[calc(100vh-54px)] bg-background translate-x-full transition-transform duration-300 p-4 md:p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 opacity-0">
         {bars.map((bar) => {
             return (
                 <li class="">
-                    <a class="md:text-lg leading-none" href={"/" + toBarPath(bar)}>{bar.bar_name}
-                    <span class="text-secondary text-sm md:text-base leading-none block">
-                        {`${bar.bar_street}`}
-                    </span>
-                    <span class="text-secondary text-sm md:text-base leading-none block">
-                        {`${bar.bar_zip_code} ${bar.bar_city}`}
-                    </span>
+                    <a 
+                        class="md:text-lg leading-none" 
+                        href={`${lang != MAIN_LANG ? "/" + lang : ""}/${toBarPath(bar)}`}
+                        >
+                        {bar.bar_name}
+                        <span class="text-secondary text-sm md:text-base leading-none block">
+                            {`${bar.bar_street}`}
+                        </span>
+                        <span class="text-secondary text-sm md:text-base leading-none block">
+                            {`${bar.bar_zip_code} ${bar.bar_city}`}
+                        </span>
                     </a>
                 </li>
                 )

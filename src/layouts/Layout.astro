@@ -1,7 +1,7 @@
 ---
 import '../global.css'
 import Navigation from "../components/Navigation.astro"
-const { title, lang } = Astro.props;
+const { title, lang, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -11,6 +11,7 @@ const { title, lang } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={ Astro.generator } />
+		<meta name="description" content={ description }>
 		<title>{ title }</title>
 		<script src="/main.js" defer></script>
 	</head>
