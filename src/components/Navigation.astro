@@ -70,7 +70,7 @@ const { lang } = Astro.props
                 <li class="">
                     <a 
                         class="md:text-lg leading-none" 
-                        href={`${lang != MAIN_LANG ? "/" + lang : ""}/${toBarPath(bar)}`}
+                        href={`${lang && lang != MAIN_LANG ? "/" + lang : ""}/${toBarPath(bar)}`}
                         >
                         {bar.bar_name}
                         <span class="text-secondary text-sm md:text-base leading-none block">
