@@ -2,13 +2,18 @@
 import { API_BASE_URL, toBarPath } from "../utils/g"
 import CloseIcon from './icons/CloseIcon.astro';
 import BurgerIcon from "./icons/BurgerIcon.astro";
+import {Picture} from '@astrojs/image/components';
+import anarkist_logo from '/public/anarkist_logo_light.png';
 
 const res = await fetch(`${API_BASE_URL}/api/v1/bars`);
 const bars = await res.json();
 ---
 
 <nav class="h-[54px] fixed w-full bg-background border-b-[1px] border-line">
-    <div class="w-full h-full flex items-center justify-end">
+    <div class="w-full h-full flex items-center justify-between">
+        <div class="">
+            <Picture class="ml-4" src={anarkist_logo} widths={[50, 100, 150, 200]} sizes="(max-width: 100px) 100vw, 100px" alt="" aspectRatio="40:13" /> 
+        </div>
         <div onclick="toggleBurgerMenu()" class="w-6 h-6 flex items-center justify-center mr-4 relative cursor-pointer">
             <!-- rotate-180 -->
             <span id="burger" class="w-full absolute transition-transform rotate-0">
