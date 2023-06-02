@@ -62,9 +62,9 @@ const {
             <p class="text-xs md:text-sm sm:order-1 sm:flex sm:justify-between sm:mb-2 text-secondary">
                 ALC.: {beerAlc}%
                 <span class="mx-2">|</span>
-                IBU: {beer_ibu}
+                IBU: {beer_ibu ? beer_ibu : "-"}
                 <span class="mx-2">|</span>
-                EBC: {beer_ebc}
+                EBC: {beer_ebc ? beer_ibu : "-"}
             </p>
         </div>
         <div class={beerDescription ? "flex justify-between" : "flex justify-end"}>
