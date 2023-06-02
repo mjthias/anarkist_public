@@ -43,7 +43,7 @@ const strs = LANG_STRINGS[lang] // Object with lang strings
         <a class="font-medium underline" href="#beers">{strs.beersLink}</a>
     </header>
 
-    <section id="beers" aria-label={strs.beers} class="p-4 mx-auto max-w-sm sm:max-w-md md:max-w-none">
+    <section id="beers" aria-label={strs.beers} class="p-4 md:p-12 mx-auto max-w-sm sm:max-w-md md:max-w-none grid gap-6 lg:grid-cols-4">
         <h2 class="text-2xl mb-4">{strs.beers}</h2>
         <TapsContainer taps={taps} lang={lang} strs={strs}/>
     </section>
