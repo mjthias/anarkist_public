@@ -44,6 +44,8 @@ const {
             src={`${API_BASE_URL}/static/images/${beerImage}`} 
             widths={[100, 200, 300, 600]} 
             sizes="(max-width: 640) 100px, 300px" 
+            width={600}
+            height={600}
             aspectRatio="1:1" 
             alt={`${brewery_menu_name} ${beer_name}`}
         />
@@ -68,13 +70,13 @@ const {
         </div>
         <div class={beerDescription ? "flex justify-between" : "flex justify-end"}>
             {beerDescription && 
-                <a 
+                <button
                     onclick="toggleReadMoreAccordion()" 
                     data-target={`desc_${tap_id}`} 
                     class="text-sm self-end underline cursor-pointer"
                 >
                     {strs.readMore}
-                </a>
+                </button>
             }
             <p class="text-right">{beer_price} DKK</p>
         </div>

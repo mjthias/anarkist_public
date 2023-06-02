@@ -43,11 +43,15 @@ const strs = LANG_STRINGS[lang] // Object with lang strings
             {bar.bar_street} - {bar.bar_zip_code} {bar.bar_city}
         </address>
         <Picture 
-            class="mb-6 px-8" 
-            src={frontpage_image} 
-            widths={[400, 600, 800]} 
+            class="mb-6 px-8 w-full max-w-[600px] mx-auto" 
+            src={frontpage_image}
+            widths={[400, 600, 800]}
+            width={600}
+            height={450}
+            aspectRatio="60:45"
             sizes="(max-width: 600px) 100vw, 600px"
-            alt={bar.bar_name} 
+            alt={bar.bar_name}
+            loading="eager"
             />
         <a class="underline" href="#beers">{strs.beersLink}</a>
     </header>
