@@ -8,12 +8,14 @@ export const LANG_STRINGS = {
         beersLink: "Gå til øl",
         readMore: "Læs mere",
         pizzas: "Pizzaer",
+        metaDesc: "forskellige taps hos"
     },
     en: {
         beers: "Beers",
         beersLink: "Go to beers",
         readMore: "Read more",
         pizzas: "Pizzas",
+        metaDesc: "different taps at"
     }
 }
 

@@ -32,7 +32,11 @@ export async function getStaticPaths() {
 const { bar, taps, lang } = Astro.props;
 const strs = LANG_STRINGS[lang] // Object with lang strings
 ---
-<Layout title={`${bar.bar_name} | ${bar.bar_city}`} lang={lang}>
+<Layout
+    title={`${bar.bar_name} | ${bar.bar_city}`}
+    description={`${taps.length} ${strs.metaDesc} ${bar.bar_name}. ${bar.bar_street}, ${bar.bar_zip_code} ${bar.bar_city}`}
+    lang={lang}
+    >
 
     <header 
         aria-label={bar.bar_name} 
@@ -45,7 +49,7 @@ const strs = LANG_STRINGS[lang] // Object with lang strings
         <Picture 
             class="mb-6 px-8 w-full max-w-[600px] mx-auto" 
             src={frontpage_image}
-            widths={[400, 600, 800]}
+            widths={[400, 600, 800, 1200]}
             width={600}
             height={450}
             aspectRatio="60:45"

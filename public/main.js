@@ -13,6 +13,8 @@ function toggleBurgerMenu() {
 
     const menu = document.querySelector(".burger-menu");
     menu.classList.toggle("!translate-x-0");
+    menu.classList.remove("opacity-0");
+    menu.classList.add("grid");
 }
 
 function toggleLocales() {
